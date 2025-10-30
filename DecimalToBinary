@@ -1,0 +1,44 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class DecimalToBinary {
+    public static String convertToBinary(int decimal) {
+        if (decimal == 0) {
+            return "0";
+        }
+
+        Stack<Integer> stack = new Stack<>();
+        int number = decimal;
+
+        // Bước 1: Chia cho 2, lấy phần dư và đẩy vào stack
+        while (number > 0) {
+            int remainder = number % 2;
+            stack.push(remainder);
+            number = number / 2;
+        }
+
+        // Bước 2: Đọc phần dư từ trên xuống (LIFO)
+        StringBuilder binary = new StringBuilder();
+        while (!stack.isEmpty()) {
+            binary.append(stack.pop());
+        }
+
+        return binary.toString();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhập số thập phân cần chuyển: ");
+        int decimal = scanner.nextInt();
+
+        String binary = convertToBinary(decimal);
+        System.out.println("Số nhị phân tương ứng là: " + binary);
+
+        // Ví dụ test nhanh
+        System.out.println("\n=== Kiểm thử mẫu ===");
+        int[] tests = {0, 1, 2, 5, 10, 15, 30, 111};
+        for (int n : tests) {
+            System.out.printf("%3d → %s%n", n, convertToBinary(n));
+        }
+    }
+}
