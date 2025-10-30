@@ -1,0 +1,39 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class FizzBuzzTranslateTest {
+
+    @Test
+    void testFizz() {
+        assertEquals("Fizz", FizzBuzzTranslate.translate(3));  // chia hết cho 3
+        assertEquals("Fizz", FizzBuzzTranslate.translate(13)); // chứa số 3
+    }
+
+    @Test
+    void testBuzz() {
+        assertEquals("Buzz", FizzBuzzTranslate.translate(5));  // chia hết cho 5
+        assertEquals("Buzz", FizzBuzzTranslate.translate(52)); // chứa số 5
+    }
+
+    @Test
+    void testFizzBuzz() {
+        assertEquals("FizzBuzz", FizzBuzzTranslate.translate(15)); // chia hết cho 3 và 5
+        assertEquals("FizzBuzz", FizzBuzzTranslate.translate(30)); // chia hết cho cả 3 và 5
+    }
+
+    @Test
+    void testNormalNumbers() {
+        assertEquals("hai", FizzBuzzTranslate.translate(2));
+        assertEquals("mười lăm", FizzBuzzTranslate.translate(15)); // FizzBuzz case
+        assertEquals("hai mươi", FizzBuzzTranslate.translate(20));
+        assertEquals("hai mươi ba", FizzBuzzTranslate.translate(23)); // chứa 3 nên Fizz
+    }
+
+    @Test
+    void testInvalidNumber() {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            FizzBuzzTranslate.translate(0);
+        });
+        assertTrue(exception.getMessage().contains("Số phải lớn hơn 0"));
+    }
+}
