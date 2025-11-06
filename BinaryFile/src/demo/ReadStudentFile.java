@@ -1,16 +1,19 @@
 package demo;
 
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 
-public class ReadBinaryFile {
+public class ReadStudentFile {
     public static void main(String[] args) {
-        try (FileInputStream fis = new FileInputStream("C:\\Users\\Admin\\Downloads\\students.dat")) {
-            int data;
-            while ((data = fis.read()) != -1) {
-                System.out.print((char) data);
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("D:/Module2/BinaryFile/src/demo/students.dat"))) {
+
+            ArrayList<Student> students = (ArrayList<Student>) ois.readObject();
+            for (Student s : students) {
+                System.out.println(s);
             }
-        } catch (IOException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
